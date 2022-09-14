@@ -14,10 +14,21 @@ struct lista {
 
 // Cria uma liva lista
 ListaInt *lista_criar() {
-  // TODO
+  ListaInt *nova_lista = malloc(sizeof(struct lista));
+
+  nova_lista->elementos = NULL;
+  nova_lista->capacidade = 0;
+  nova_lista->quantidade = 0;
+
+  return nova_lista;
 }
 
-void lista_apagar(ListaInt *lista) {}
+void lista_apagar(ListaInt *lista) {
+  if(lista->elementos != NULL) {
+    free(lista->elementos);
+  }
+  free(lista);
+}
 
 void lista_inserir(ListaInt *lista, int elemento) {
   // TODO: Verificar se há capacidade disponível
