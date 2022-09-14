@@ -1,14 +1,16 @@
 #include <limits.h>
 #include <stdbool.h>
 
-typedef struct lista {
+#include "lista.h"
+
+struct lista {
   // local de armazenamento
   int *elementos;
   // quantidade de índices *usados*
   unsigned int quantidade;
   // quantidade de índices *alocados*
   unsigned int capacidade;
-} ListaInt;
+};
 
 // Cria uma liva lista
 ListaInt *lista_criar() {
