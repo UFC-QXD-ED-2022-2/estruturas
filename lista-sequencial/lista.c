@@ -12,6 +12,37 @@ struct lista {
   unsigned int capacidade;
 };
 
+struct it_lista {
+  ListaInt *lista;
+  // Índice do próximo elemento a ser reportado
+  unsigned int i_elemento;
+};
+
+ListaIntIterador *it_lista_criar(ListaInt *lista) {
+  ListaIntIterador *novo_it = malloc(sizeof(struct it_lista));
+
+  novo_it->lista = lista;
+  novo_it->i_elemento = 0;
+
+  return novo_it;
+}
+
+void it_lista_apagar(ListaIntIterador *it) {
+  free(it);
+}
+
+bool it_lista_tem_proximo(ListaIntIterador *it) {
+  return it->i_elemento < it->lista->quantidade;
+}
+
+int it_lista_obter_elemento(ListaIntIterador *it) {
+  return it->lista->elementos[it->i_elemento];
+}
+
+void it_lista_avancar(ListaIntIterador *it) {
+  ++it->i_elemento;
+}
+
 // Cria uma liva lista
 ListaInt *lista_criar() {
   ListaInt *nova_lista = malloc(sizeof(struct lista));

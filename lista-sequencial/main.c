@@ -17,5 +17,17 @@ int main() {
         lista_buscar(lista, 20)
     );
 
+    ListaIntIterador *it;
+
+    printf("Lista = ");
+    for(
+        it = it_lista_criar(lista);
+        it_lista_tem_proximo(it);
+        it_lista_avancar(it)
+    ) {
+        printf("%d, ", it_lista_obter_elemento(it));
+    }
+    printf("\n");
+
     return 0;
 }
