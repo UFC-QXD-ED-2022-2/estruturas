@@ -30,8 +30,19 @@ void lista_apagar(ListaInt *lista) {
   free(lista);
 }
 
+static
+void lista_garante_capacidade(ListaInt *lista, unsigned int capacidade_minima) {
+  if(lista->capacidade < capacidade_minima) {
+    // Realocar o vetor `elementos`
+    // `realloc` se encarrega de transportar os dados anteriores
+    // para a nova porção de memória.
+    lista->elementos = realloc(lista->elementos, capacidade_minima*sizeof(int));
+    lista->capacidade = capacidade_minima;
+  }
+}
+
 void lista_inserir(ListaInt *lista, int elemento) {
-  // TODO: Verificar se há capacidade disponível
+  lista_garante_capacidade(lista, lista->quantidade + 1);
 
   // Supondo que existe capacidade
   lista->elementos[lista->quantidade] = elemento;
@@ -39,7 +50,7 @@ void lista_inserir(ListaInt *lista, int elemento) {
 }
 
 void lista_inserir_ordenado(ListaInt *lista, int elemento) {
-  // TODO: Verificar se há capacidade disponível
+  lista_garante_capacidade(lista, lista->quantidade + 1);
 
   if (lista->quantidade == 0) {
     lista->elementos[lista->quantidade] = elemento;
