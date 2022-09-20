@@ -12,7 +12,12 @@ void lista_enc_apagar(ListaEncInt *lista);
 bool lista_enc_pertence(ListaEncInt *lista, int elemento);
 
 void lista_enc_inserir_inicio(ListaEncInt *lista, int elemento);
+void lista_enc_inserir_fim(ListaEncInt *lista, int elemento);
+void lista_enc_inserir_em(ListaEncInt *lista, int elemento, unsigned int indice);
 
 void lista_enc_remover_inicio(ListaEncInt *lista);
+void lista_enc_remover_fim(ListaEncInt *lista);
+void lista_enc_remover_em(ListaEncInt *lista, int elemento, unsigned int indice);
+void lista_enc_remover_todos(ListaEncInt *lista, int elemento);
 
 #endif
