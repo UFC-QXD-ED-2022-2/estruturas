@@ -65,6 +65,21 @@ void lista_enc_inserir_inicio(ListaEncInt *lista, int elemento) {
   lista->primeiro = novo_no;
 }
 
+void lista_enc_inserir_fim(ListaEncInt *lista, int elemento) {
+  NoEnc *ultimo = lista->primeiro;
+  NoEnc *novo_no = no_enc_criar(elemento);
+
+  if(lista->primeiro == NULL) { // Lista vazia
+    lista->primeiro = novo_no;
+  } else {
+    while(ultimo->proximo != NULL) {
+      ultimo = ultimo->proximo;
+    }
+
+    ultimo->proximo = novo_no;
+  }
+}
+
 void lista_enc_remover_inicio(ListaEncInt *lista) {
   if (lista->primeiro != NULL) {
     NoEnc *removido = lista->primeiro;
@@ -77,4 +92,31 @@ void lista_enc_remover_inicio(ListaEncInt *lista) {
     // * no_enc_apagar(lista->proximo);
     // * lista->primeiro = novo_primeiro;
   }
+}
+
+void lista_enc_remover_fim(ListaEncInt *lista) {
+  if(lista->primeiro == NULL) {
+    return; // Pois a lista está vazia
+  } else {
+    NoEnc *atual, *anterior;
+
+    if(lista->primeiro->proximo == NULL) {
+      // Tornando a lista vazia
+      no_enc_apagar(lista->primeiro);
+      lista->primeiro = NULL;
+    } else {
+      anterior = lista->primeiro;
+      atual = anterior->proximo;
+
+      while(atual->proximo != NULL) {
+        anterior = atual;
+        atual = atual->proximo;
+      }
+
+      no_enc_apagar(atual); // Pois `atual` marca o último neste ponto
+      anterior->proximo = NULL;
+    }
+  }
+}
+
 }
