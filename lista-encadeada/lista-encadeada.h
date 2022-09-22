@@ -32,4 +32,11 @@ bool it_lista_enc_eh_valido(ItListaEncInt *it);
 int it_lista_enc_obter_elemento(ItListaEncInt *it);
 void it_lista_enc_avancar(ItListaEncInt *it);
 
+ItListaEncInt *lista_enc_obter_primeiro(ListaEncInt *lista, int elemento);
+ItListaEncInt *lista_enc_obter_posicao(ListaEncInt *lista, unsigned int indice);
+bool *lista_enc_inserir_apos_iterador(ListaEncInt *lista, int elemento,
+                                      ItListaEncInt *posicao);
+bool lista_enc_remover_apos_iterador(ListaEncInt *lista,
+                                     ItListaEncInt *posicao);
+
 #endif
