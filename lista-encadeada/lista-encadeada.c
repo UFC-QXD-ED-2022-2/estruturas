@@ -58,6 +58,16 @@ bool lista_enc_pertence(ListaEncInt *lista, int elemento) {
   return false;
 }
 
+static NoEnc *lista_enc_obter_no_indice(ListaEncInt *lista, unsigned int indice) {
+  NoEnc *no = lista->primeiro;
+
+  while (indice > 1 && no != NULL) {
+    no = no->proximo;
+    --indice;
+  }
+
+  return no;
+}
 void lista_enc_inserir_inicio(ListaEncInt *lista, int elemento) {
   NoEnc *novo_no = no_enc_criar(elemento);
 
@@ -89,7 +99,8 @@ bool lista_enc_inserir_em(ListaEncInt *lista, int elemento, unsigned int indice)
   } else {
     NoEnc *anterior = lista->primeiro;
 
-    while(indice > 1 && anterior != NULL) {
+    // TODO: Usar a nova função de indexação
+    while (indice > 1 && anterior != NULL) {
       anterior = anterior->proximo;
       --indice;
     }
@@ -157,7 +168,8 @@ bool lista_enc_remover_em(ListaEncInt *lista, unsigned int indice) {
   } else {
     NoEnc *anterior = lista->primeiro;
 
-    while(indice > 1 && anterior != NULL) {
+    // TODO: Usar a nova função de indexação
+    while (indice > 1 && anterior != NULL) {
       anterior = anterior->proximo;
       --indice;
     }
