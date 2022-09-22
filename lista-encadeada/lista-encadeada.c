@@ -146,4 +146,30 @@ void lista_enc_remover_fim(ListaEncInt *lista) {
   }
 }
 
+bool lista_enc_remover_em(ListaEncInt *lista, int elemento, unsigned int indice) {
+  if(indice == 0) {
+    if(lista->primeiro != NULL) {
+      no_enc_apagar(lista->primeiro);
+      lista->primeiro = lista->primeiro->proximo;
+    } else {
+      return false;
+    }
+  } else {
+    NoEnc *anterior = lista->primeiro;
+
+    while(indice > 1 && anterior != NULL) {
+      anterior = anterior->proximo;
+      --indice;
+    }
+
+    if(anterior != NULL && anterior->proximo != NULL) {
+      NoEnc *aux = anterior->proximo->proximo;
+      no_enc_apagar(anterior->proximo);
+      anterior->proximo = aux;
+    } else {
+      return false;
+    }
+  }
+
+  return true;
 }
