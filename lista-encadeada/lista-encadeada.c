@@ -146,7 +146,7 @@ void lista_enc_remover_fim(ListaEncInt *lista) {
   }
 }
 
-bool lista_enc_remover_em(ListaEncInt *lista, int elemento, unsigned int indice) {
+bool lista_enc_remover_em(ListaEncInt *lista, unsigned int indice) {
   if(indice == 0) {
     if(lista->primeiro != NULL) {
       no_enc_apagar(lista->primeiro);
