@@ -11,6 +11,8 @@ void lista_enc_apagar(ListaEncInt *lista);
 
 bool lista_enc_pertence(ListaEncInt *lista, int elemento);
 
+int lista_enc_obter_valor(ListaEncInt *lista, unsigned int indice);
+
 void lista_enc_inserir_inicio(ListaEncInt *lista, int elemento);
 void lista_enc_inserir_fim(ListaEncInt *lista, int elemento);
 bool lista_enc_inserir_em(ListaEncInt *lista, int elemento, unsigned int indice);

@@ -1,5 +1,6 @@
 #include "lista-encadeada.h"
 
+#include <limits.h>
 #include <stdlib.h>
 
 typedef struct no_encadeado {
@@ -68,6 +69,18 @@ static NoEnc *lista_enc_obter_no_indice(ListaEncInt *lista, unsigned int indice)
 
   return no;
 }
+
+int lista_enc_obter_valor(ListaEncInt *lista, unsigned int indice) {
+  NoEnc *no = lista_enc_obter_no_indice(lista, indice);
+
+  // TODO: Proibir a inserção do valor INT_MAX
+  if (no != NULL) {
+    return no->elemento;
+  } else {
+    return INT_MAX; // Representa que o índice não existe
+  }
+}
+
 void lista_enc_inserir_inicio(ListaEncInt *lista, int elemento) {
   NoEnc *novo_no = no_enc_criar(elemento);
 
