@@ -199,6 +199,31 @@ bool lista_enc_remover_em(ListaEncInt *lista, unsigned int indice) {
   return true;
 }
 
+unsigned int lista_enc_remover_todos(ListaEncInt *lista, int elemento) {
+  unsigned int nos_removidos = 0;
+
+  while (lista->primeiro != NULL && lista->primeiro->elemento == elemento) {
+    NoEnc *temp = lista->primeiro->proximo;
+    no_enc_apagar(lista->primeiro);
+    lista->primeiro = temp;
+    ++nos_removidos;
+  }
+
+  if (lista->primeiro != NULL) {
+    NoEnc *atual = lista->primeiro;
+
+    while (atual->proximo != NULL) {
+      if (atual->proximo->elemento == elemento) {
+        NoEnc *temp = atual->proximo->proximo;
+        no_enc_apagar(atual->proximo);
+        atual->proximo = temp;
+        ++nos_removidos;
+      }
+    }
+  }
+
+  return nos_removidos;
+}
 
 // Iteradores -->
 struct iterador_lista_encadeada {
