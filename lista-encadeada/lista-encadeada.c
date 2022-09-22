@@ -198,3 +198,29 @@ bool lista_enc_remover_em(ListaEncInt *lista, unsigned int indice) {
 
   return true;
 }
+
+
+// Iteradores -->
+struct iterador_lista_encadeada {
+  NoEnc *no_atual;
+};
+
+ItListaEncInt *it_lista_enc_criar(ListaEncInt *lista) {
+  ItListaEncInt *iterador = malloc(sizeof(struct iterador_lista_encadeada));
+
+  iterador->no_atual = lista->primeiro;
+
+  return iterador;
+}
+
+void it_lista_enc_apagar(ItListaEncInt *it) { free(it); }
+
+bool it_lista_enc_eh_valido(ItListaEncInt *it) { return it->no_atual != NULL; }
+
+int it_lista_enc_obter_elemento(ItListaEncInt *it) {
+  return it->no_atual->elemento;
+}
+
+void it_lista_enc_avancar(ItListaEncInt *it) {
+  it->no_atual = it->no_atual->proximo;
+}
