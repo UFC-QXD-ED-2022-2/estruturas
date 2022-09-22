@@ -80,6 +80,33 @@ void lista_enc_inserir_fim(ListaEncInt *lista, int elemento) {
   }
 }
 
+bool lista_enc_inserir_em(ListaEncInt *lista, int elemento, unsigned int indice) {
+  if(indice == 0) {
+    NoEnc *novo_no = no_enc_criar(elemento);
+
+    novo_no->proximo = lista->primeiro;
+    lista->primeiro = novo_no;
+  } else {
+    NoEnc *anterior = lista->primeiro;
+
+    while(indice > 1 && anterior != NULL) {
+      anterior = anterior->proximo;
+      --indice;
+    }
+
+    if(anterior != NULL) {
+      NoEnc *novo_no = no_enc_criar(elemento);
+
+      novo_no->proximo = anterior->proximo;
+      anterior->proximo = novo_no;
+    } else {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 void lista_enc_remover_inicio(ListaEncInt *lista) {
   if (lista->primeiro != NULL) {
     NoEnc *removido = lista->primeiro;
