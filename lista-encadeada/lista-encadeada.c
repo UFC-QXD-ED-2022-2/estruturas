@@ -225,6 +225,29 @@ bool lista_enc_remover_apos_iterador(ListaEncInt *lista,
   }
 }
 
+// Considerando o intervalo semi-aberto (inicio, fim]
+void lista_enc_remover_entre_it(ListaEncInt *lista, ItListaEncInt *inicio,
+                                ItListaEncInt *fim) {
+  if (inicio->no_atual != NULL) {
+    NoEnc *i_no = inicio->no_atual;
+    NoEnc *f_no = fim->no_atual;
+    NoEnc *atual = i_no->proximo;
+
+    while (atual != f_no) {
+      NoEnc *temp = atual->proximo;
+      no_enc_apagar(atual);
+      atual = temp;
+    }
+
+    if (f_no != NULL) {
+      i_no->proximo = f_no->proximo;
+      no_enc_apagar(f_no);
+    } else {
+      i_no->proximo = NULL;
+    }
+  }
+}
+
 unsigned int lista_enc_remover_todos(ListaEncInt *lista, int elemento) {
   unsigned int nos_removidos = 0;
 
