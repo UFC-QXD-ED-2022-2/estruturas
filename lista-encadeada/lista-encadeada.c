@@ -63,7 +63,8 @@ bool lista_enc_pertence(ListaEncInt *lista, int elemento) {
   return false;
 }
 
-static NoEnc *lista_enc_obter_no_indice(ListaEncInt *lista, unsigned int indice) {
+static NoEnc *lista_enc_obter_no_indice(ListaEncInt *lista,
+                                        unsigned int indice) {
   NoEnc *no = lista->primeiro;
 
   while (indice > 1 && no != NULL) {
@@ -96,10 +97,10 @@ void lista_enc_inserir_fim(ListaEncInt *lista, int elemento) {
   NoEnc *ultimo = lista->primeiro;
   NoEnc *novo_no = no_enc_criar(elemento);
 
-  if(lista->primeiro == NULL) { // Lista vazia
+  if (lista->primeiro == NULL) { // Lista vazia
     lista->primeiro = novo_no;
   } else {
-    while(ultimo->proximo != NULL) {
+    while (ultimo->proximo != NULL) {
       ultimo = ultimo->proximo;
     }
 
@@ -107,8 +108,9 @@ void lista_enc_inserir_fim(ListaEncInt *lista, int elemento) {
   }
 }
 
-bool lista_enc_inserir_em(ListaEncInt *lista, int elemento, unsigned int indice) {
-  if(indice == 0) {
+bool lista_enc_inserir_em(ListaEncInt *lista, int elemento,
+                          unsigned int indice) {
+  if (indice == 0) {
     NoEnc *novo_no = no_enc_criar(elemento);
 
     novo_no->proximo = lista->primeiro;
@@ -122,7 +124,7 @@ bool lista_enc_inserir_em(ListaEncInt *lista, int elemento, unsigned int indice)
       --indice;
     }
 
-    if(anterior != NULL) {
+    if (anterior != NULL) {
       NoEnc *novo_no = no_enc_criar(elemento);
 
       novo_no->proximo = anterior->proximo;
@@ -133,6 +135,16 @@ bool lista_enc_inserir_em(ListaEncInt *lista, int elemento, unsigned int indice)
   }
 
   return true;
+}
+
+bool lista_enc_inserir_apos_iterador(ListaEncInt *lista, int elemento,
+                                     ItListaEncInt *posicao) {
+  if (it_lista_enc_eh_valido(posicao)) {
+    NoEnc *no = posicao->no_atual;
+
+    // TODO: Extrair operação de "inserir na frente de um nó" para uma função
+    //       auxiliar e usá-la tanto aqui quanto nos outros `inserir`.
+  }
 }
 
 void lista_enc_remover_inicio(ListaEncInt *lista) {
@@ -150,12 +162,12 @@ void lista_enc_remover_inicio(ListaEncInt *lista) {
 }
 
 void lista_enc_remover_fim(ListaEncInt *lista) {
-  if(lista->primeiro == NULL) {
+  if (lista->primeiro == NULL) {
     return; // Pois a lista está vazia
   } else {
     NoEnc *atual, *anterior;
 
-    if(lista->primeiro->proximo == NULL) {
+    if (lista->primeiro->proximo == NULL) {
       // Tornando a lista vazia
       no_enc_apagar(lista->primeiro);
       lista->primeiro = NULL;
@@ -163,7 +175,7 @@ void lista_enc_remover_fim(ListaEncInt *lista) {
       anterior = lista->primeiro;
       atual = anterior->proximo;
 
-      while(atual->proximo != NULL) {
+      while (atual->proximo != NULL) {
         anterior = atual;
         atual = atual->proximo;
       }
@@ -175,8 +187,8 @@ void lista_enc_remover_fim(ListaEncInt *lista) {
 }
 
 bool lista_enc_remover_em(ListaEncInt *lista, unsigned int indice) {
-  if(indice == 0) {
-    if(lista->primeiro != NULL) {
+  if (indice == 0) {
+    if (lista->primeiro != NULL) {
       no_enc_apagar(lista->primeiro);
       lista->primeiro = lista->primeiro->proximo;
     } else {
@@ -191,7 +203,7 @@ bool lista_enc_remover_em(ListaEncInt *lista, unsigned int indice) {
       --indice;
     }
 
-    if(anterior != NULL && anterior->proximo != NULL) {
+    if (anterior != NULL && anterior->proximo != NULL) {
       NoEnc *aux = anterior->proximo->proximo;
       no_enc_apagar(anterior->proximo);
       anterior->proximo = aux;
@@ -201,6 +213,16 @@ bool lista_enc_remover_em(ListaEncInt *lista, unsigned int indice) {
   }
 
   return true;
+}
+
+bool lista_enc_remover_apos_iterador(ListaEncInt *lista,
+                                     ItListaEncInt *posicao) {
+  if (it_lista_enc_eh_valido(posicao)) {
+    NoEnc *no = posicao->no_atual;
+
+    // TODO: Extrair operação de "remover da frente de um nó" para uma função
+    // auxiliar e usá-la tanto aqui quanto nos outros `remover`.
+  }
 }
 
 unsigned int lista_enc_remover_todos(ListaEncInt *lista, int elemento) {
