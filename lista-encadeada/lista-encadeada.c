@@ -12,6 +12,10 @@ struct lista_encadeada {
   NoEnc *primeiro;
 };
 
+struct iterador_lista_encadeada {
+  NoEnc *no_atual;
+};
+
 // Funções privadas >>>
 
 NoEnc *no_enc_criar(int elemento) {
@@ -226,9 +230,6 @@ unsigned int lista_enc_remover_todos(ListaEncInt *lista, int elemento) {
 }
 
 // Iteradores -->
-struct iterador_lista_encadeada {
-  NoEnc *no_atual;
-};
 
 ItListaEncInt *it_lista_enc_criar(ListaEncInt *lista) {
   ItListaEncInt *iterador = malloc(sizeof(struct iterador_lista_encadeada));
